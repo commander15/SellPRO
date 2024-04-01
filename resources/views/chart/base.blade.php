@@ -12,7 +12,7 @@
         $chart_type = $type;
     @endphp
 
-    <canvas id="{{ $chart_type }}_chart_{{ $id }}" width="100%" height="40" onclick="update{{ $chart_name }}Chart{{ $id }}()">
+    <canvas id="{{ $chart_type }}_chart_{{ $id }}" width="100%" height="40%" onclick="update{{ $chart_name }}Chart{{ $id }}()">
     </canvas>
     
     <script>

@@ -15,26 +15,27 @@
 
 <div class="row">
     <div class="col-xl-6">
-            @include('chart.pie', [ 
-                'id' => 1,
-                'title' => 'Top 5 Products',
-                'labels' => $area['labels'],
-                'dataset' => [
-                    [ 'name' => 'data', 'values' => $area['data'] ],
-                    [ 'name' => 'colors', 'values' => [ '#007bff', '#dc3545' ] ]
-                ]
-            ])
+        @include('chart.pie', [ 
+            'id' => 1,
+            'title' => 'Top 5 Products',
+            'labels' => $top['labels'],
+            'dataset' => [
+                [ 'name' => 'data', 'values' => $top['data'] ],
+                [ 'name' => 'colors', 'values' => $top['colors'] ]
+            ]
+        ])
+    </div>
 
-            @include('chart.area', [ 
-                'id' => 2,
-                'title' => 'Sales', 
-                'labels' => $area['labels'],
-                'dataset' => [
-                    [ 'name' => 'data', 'values' => $area['data'] ],
-                    [ 'name' => 'label', 'values' => 'Quantity' ]
-                ]
-            ])
-            </div>
+    <div class="col-xl-6">
+        @include('chart.area', [ 
+            'id' => 2,
+            'title' => 'Sales', 
+            'labels' => $growth['labels'],
+            'dataset' => [
+                [ 'name' => 'data', 'values' => $growth['data'] ],
+                [ 'name' => 'label', 'values' => 'Amount' ]
+            ]
+        ])
     </div>
 </div>
 

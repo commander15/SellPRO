@@ -14,9 +14,6 @@ function updatePieChart(id, labels, dataset) {
       }],
     },
   });
-
-  ctx.style.width = "200px";
-  ctx.style.height = "200px";
 }
 
 // Pie Chart Example
