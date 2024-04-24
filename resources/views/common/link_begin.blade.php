@@ -1,16 +1,23 @@
-<form id="form_{{ $id }}" class="d-inline" method="POST" action="{{ $url }}">
-    @csrf
-    @method($method)
-
-    @if (isset($name) && isset($value))
-        <input name="{{ $name }}" value="{{ $value }}" type="hidden"/>
-    @endif
-
+<div id="link_{{ $data_id }}" class="d-inline">
     <script>
-        function submit_form_{{ $id }}() {
-            form = document.getElementById('form_{{ $id }}');
-            form.submit();
+        function send_request_{{ $data_id }}() 
+        {
+            fetch('{{ $url }}', {
+                'method': '{{ $method }}',
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                @if (isset($data))
+                    JSON.stringify({{ Js::from($data) }}),
+                @endif
+            }).then(response => {
+                if (!response.ok)
+                    alert('Error during request !');
+                else
+                    window.location.reload();
+            });
         }
     </script>
 
-    <div class="d-inline" onclick="submit_form_{{ $id }}()">
+    <div class="d-inline" onclick="send_request_{{ $data_id }}()">

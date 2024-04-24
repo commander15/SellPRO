@@ -15,7 +15,7 @@ class SellerController extends Controller
     public function welcome(Request $request)
     {
         if ($request->user() == null) {
-            if (User::count('id') == 0) {
+            if (User::where('email', '=', 'admin@sellpro.com')->count('id') == 0) {
                 $admin = new User();
                 $admin->name = 'Admin';
                 $admin->email = 'admin@sellpro.com';
@@ -77,11 +77,9 @@ class SellerController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->save();
 
-        return $this->view('seller.index', [
-            'sellers' => User::all([ 'id', 'name', 'email' ]),
-            'save_error' => !$user->save()
-        ]);
+        return redirect('/sellers');
     }
 
     /**
@@ -89,32 +87,38 @@ class SellerController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('seller.show', [ 'seller' => $user ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        return view('seller.edit', [ 'seller' => $user ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, string $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->has('password'))
+            $user->password = $request->password;
+        $user->update();
+        return redirect('/sellers');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(string $id)
     {
-        if (!$user->delete())
-            $this->errorMessage = 'Error during user deletion: ' . $user->name;
-        return $this->index();
+        $user = User::find($id);
+        return response()->json($user, ($user->delete() ? 200 : 404));
     }
 }

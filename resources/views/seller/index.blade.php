@@ -21,7 +21,7 @@
         <td>{{ $seller->name }}</td>
         <td>{{ $seller->email }}</td>
     @include('common.table_row_end', [
-        'id' => $seller->id,
+        'data_id' => $seller->id,
         'edition_link' => url('/sellers'),
         'deletion_link' => url('/sellers')
     ])

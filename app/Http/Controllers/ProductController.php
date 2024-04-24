@@ -20,7 +20,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return $this->view('product.create');
+        return $this->view('product.add');
     }
 
     /**
@@ -51,22 +51,27 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return $this->view('product.edit', [ 'product' => $product ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, string $id)
     {
-        //
+        $product = Product::find($id);
+        $product->fill($request->all());
+        $product->update();
+
+        return redirect('/products');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(string $id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
     }
 }

@@ -17,20 +17,20 @@ $link = '/customers';
     @include('common.table_begin', [
         'id' => 1,
         'columns' => [
+            'NIC',
             'Name',
-            'Description',
-            'Price'
+            'First Name'
         ],
         'add_link' => $link . '/create'
     ])
 
     @foreach ($customers as $customer)
         @include('common.table_row_begin')
-            <td><a href="{{ $link }}/{{ $customer->id }}">{{ $customer->name }}</a></td>
+            <td>{{ $customer->nic }}</td>
             <td>{{ $customer->name }}</td>
             <td>{{ $customer->firstName }}</td>
         @include('common.table_row_end', [
-            'id' => $customer->id,
+            'data_id' => $customer->id,
             'edition_link' => $link,
             'deletion_link' => $link
         ])

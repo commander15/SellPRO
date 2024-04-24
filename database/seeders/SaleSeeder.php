@@ -2,19 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product;
-use App\Models\Stock;
+use App\Models\Sale;
+use App\Models\SaleProduct;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ProductSeeder extends Seeder
+class SaleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Product::factory(10)->create();
-        Stock::factory(random_int(1,15))->create();
+        $count = random_int(1,10);
+
+        Sale::factory($count)->create();
+        SaleProduct::factory($count * 1.5)->create();
     }
 }

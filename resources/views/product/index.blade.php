@@ -25,7 +25,7 @@
             <td>{{ $product->description }}</td>
             <td>{{ $product->price }}</td>
         @include('common.table_row_end', [
-            'id' => $product->id,
+            'data_id' => $product->id,
             'edition_link' => url('/products'),
             'deletion_link' => url('/products')
         ])

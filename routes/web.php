@@ -32,7 +32,7 @@ Route::middleware([ 'auth' ])->group(function() {
 
     Route::resource("/sellers", SellerController::class);
     Route::resource('/products', ProductController::class);
-    Route::resource('/products/{id}', StockController::class);
+    Route::resource('/products/{product_id}/stocks', StockController::class);
     Route::resource('/customers', CustomerController::class);
     Route::resource('/sales', SaleController::class);
 });
